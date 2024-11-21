@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPS BOOKSHOP</title>
+  <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/onleffect.css">
+</head>
+<body>
+  <div class="header">
+    <img onclick="window.history.back()" src="../img/back.png" alt="" />
+    <h1>SHOPPING CART</h1>
+    <p>Price</p>
+    <p></p>
+  </div>
+  <div id="cart-container"></div>
+  <div class="footer">
+    <div>
+      <input type="checkbox" name="buy" id="buy-all" />
+      <label for="buy-all">Tất cả</label>
+    </div>
+    <div></div>
+    <p>Tổng thanh toán: <span class="price sum">0 VND</span></p>
+    <a href="DKMH.html"><button class="lpbtn"><span>THANH TOÁN</span></button></a>
+  </div>
+  <script src="cart.js"></script>
+  <script src="books.js"></script>
+  <script src="loadBooks.js"></script>
+</body>
+</html>

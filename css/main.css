@@ -1,0 +1,164 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f4eb;
+    margin: 0;
+    font-size: 2vh;
+    font-family: monospace;
+}
+
+.shelf-container {
+    margin-top: 10vh;
+    width: 80vw;
+    gap: 2.5vh;
+    background-color: #af8f6f;
+    padding: 1vw;
+    border-radius: 1vw;
+    position: relative;
+    box-shadow: 0 0 20px #282828;
+}
+
+.book-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1vw;
+    width: 80vw;
+    margin-left: -0.1vw;
+    overflow-x: scroll;
+}
+
+.book {
+    z-index: 10;
+    display: flex;
+    transition: all 0.3s ease;
+}
+
+.productimage {
+    position: relative;
+    display: flex;
+}
+
+.book-info {
+    height: max-content;
+    display: block;
+    background: white;
+    margin-left: 1vw;
+    padding: 1vw;
+    border-radius: 2vh;
+    text-align: center;
+    margin-bottom: 5px;
+
+    .name {
+        font-size: 2vh;
+        font-weight: bold;
+    }
+
+    .price {
+        color: green;
+    }
+
+    .rate {
+        color: gold;
+    }
+}
+
+.productimage img {
+    height: 30vh;
+    box-shadow: 1vh 1vw 25px 2px #282828;
+    transition: all 0.3s ease;
+    align-items: center;
+    border-radius: 0.5vw;
+
+}
+
+.productimage:hover img {
+    opacity: 0.3;
+}
+
+.productimage:hover .book-buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.book-buttons {
+    display: none;
+}
+
+.book:hover .book-buttons {
+    opacity: 1;
+}
+
+.book img:hover {
+        box-shadow: 0 0 20px black;
+        transform: translateY(-1vh);
+}
+
+.book-buttons button {
+    
+    font-size: 1.5vh;
+    padding: 1vh;
+    color: white;
+    border: none;
+    border-radius: 5vw;
+    cursor: pointer;
+    margin-bottom: 1vh;
+    text-transform: uppercase;
+    font-weight: bolder;
+    width: 15vh;
+
+    .details {
+        background-color: #997d61;
+    }
+
+    .add {
+        background-color: #006400;
+    }
+}
+
+.book-buttons button:hover {
+    background-color: white;
+    color: #282828;
+    transform: scale(120%);
+}
+
+.shelf {
+    content: "";
+    width: 90vw;
+    transform: translateX(-5vw) translateY(-3vh);
+
+    .shelf2 {
+        height: 1.5vh;
+        background: #af8f6f;
+        top: -1px;
+        box-shadow: 0.5vw 0.5vh 25px 1px #282828;
+        border-radius: 0.1em;
+        position: relative;
+        z-index: 5;
+    }
+
+    .shelf1 {
+        clip-path: polygon(4vw 0, 86vw 0, 100% 100%, 0% 100%);
+        background: linear-gradient(#967b60 0%, #997d61 100%);
+        height: 3vh;
+    }
+
+    img:hover {
+        height: 100px;
+    }
+}
+
+.hide {
+    display: none;
+
+}

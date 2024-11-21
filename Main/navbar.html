@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navbar</title>
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+</head>
+
+<body>
+  <div class="navbar">
+    <a class="logo" href="../Main/main.html">
+      <img src="../img/ten.png" srcset="../img/logokhongten.png 1000w, ../img/ten.png 1500w" alt="DPS BOOKSHOP" />
+    </a>
+    <div class="icon menu">
+      <img src="../img/menu.png" alt="Menu" class="icon" />
+      <ul class="lv1">
+        <li><a href="#" class="genre-filter" data-genre="all">ALL</a></li>
+        <li>    
+          Sách nước ngoài
+          <ul class="lv2">
+            <li><a href="#" class="genre-filter" data-genre="Giả tưởng">Giả tưởng</a></li>
+            <li><a href="#" class="genre-filter" data-genre="Khoa học">Khoa học</a></li>
+            <li><a href="#" class="genre-filter" data-genre="Tâm Lí">Tâm lý học</a></li>
+            <!-- <li><a href="#" class="genre-filter" data-genre="Từ điển">Từ điển</a></li> -->
+          </ul>
+        </li>
+        <li>
+          Sách Việt Nam
+          <ul class="lv2">
+            <li>
+              Sách giáo khoa
+              <ul class="lv3">
+                <li><a href="#" class="genre-filter" data-genre="Lớp 10">Lớp 10</a></li>
+                <li><a href="#" class="genre-filter" data-genre="Lớp 11">Lớp 11</a></li>
+                <li><a href="#" class="genre-filter" data-genre="Lớp 12">Lớp 12</a></li>
+              </ul>
+            </li>
+            <li>
+              Văn học
+              <ul class="lv3">
+                <li><a href="#" class="genre-filter" data-genre="Kinh Điển">Tác Phẩm kinh điển</a></li>
+                <li><a href="#" class="genre-filter" data-genre="Tiểu Thuyết">Tiểu thuyết</a></li>
+                <li><a href="#" class="genre-filter" data-genre="Khoa học">Khoa học</a></li>
+                <li><a href="#" class="genre-filter" data-genre="Truyện Ngắn">Truyện ngắn</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="searchbar">
+      <input type="text" name="search" id="search" placeholder="Search..." />
+      <img src="../img/find.png" alt="Search" class="icon search" />
+    </div>
+    <div class="icon account">
+      <img src="../img/profile-user.png" alt="Profile" id="account-icon" />
+      <ul class="lv1" id="account-menu">
+        <li><a href="SignIn.html">Sign In</a></li>
+        <li><a href="SignUp.html">Sign Up</a></li>
+      </ul>
+    </div>
+    
+    <a class="icon cart" href="cart.html">
+      <img src="../img/cart.png" alt="Cart" />
+    </a>
+  </div>
+</body>
+
+</html>

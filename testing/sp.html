@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Border</title>
+    <style>
+        .custom-border {
+            width: 300px;
+            height: 300px;
+            border: 10px solid #0d223e; /* Dark blue color for the border */
+            border-radius: 0;
+            position: relative;
+        }
+
+        .custom-border:before, .custom-border:after, 
+        .custom-border > div:before, .custom-border > div:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: white; /* Background color to match the container */
+            border-radius: 50%;
+        }
+
+        .custom-border:before {
+            top: -25px;
+            left: -25px;
+            border: 10px solid #0d223e;
+        }
+
+        .custom-border:after {
+            top: -25px;
+            right: -25px;
+            border: 10px solid;
+            border-color: white white white #0d223e ;
+            transform: rotate(-30deg);
+        }
+
+        .custom-border > div:before {
+            bottom: -25px;
+            left: -25px;
+            border: 10px solid #0d223e;
+        }
+
+        .custom-border > div:after {
+            bottom: -25px;
+            right: -25px;
+            border: 10px solid #0d223e;
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-border">
+        <div></div>
+    </div>
+</body>
+</html>

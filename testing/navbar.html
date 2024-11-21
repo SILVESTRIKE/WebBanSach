@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPS BOOKSHOP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #fdf5e6;
+      margin: 0;
+      padding: 0;
+      color: #5a4632;
+      font-size: 2vh;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .book {
+      position: relative;
+      width: 70vw;
+      height: 80vh;
+      perspective: 1500px;
+    }
+    .paper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-style: preserve-3d;
+      transform-origin: left;
+      transition: transform 0.5s;
+      display: flex;
+    }
+    .front, .back {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      backface-visibility: hidden;
+      position: absolute;
+      border: 1px solid #d4c4a8;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .front {
+      z-index: 2;
+    }
+    .back {
+      transform: rotateY(180deg);
+      background-color: #5a4632;
+      color: #fdf5e6;
+    }
+    .flipped {
+      transform: rotateY(-180deg);
+    }
+    .btn-prev, .btn-next {
+      border: none;
+      cursor: pointer;
+      margin: 1vw;
+      background-color: lightgray;
+      width: 2vw;
+      height: 5vh;
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+    }
+    .btn-prev {
+      left: -2%;
+    }
+    .btn-next {
+      right: -2%;
+    }
+    .product-info h1 {
+      font-size: 2em;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      padding: 1vw;
+      margin: 1vw;
+      border: none;
+      border-radius: 2em;
+      cursor: pointer;
+      font-family: "Courier New", Courier, monospace;
+    }
+    .picturemenu img {
+      width: 5vh;
+      display: block;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      border: 1px solid #d4c4a8;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    @media screen and (max-width: 1600px) {
+      .book {
+        width: 100vw;
+        height: 100vh;
+      }
+      .btn-next, .btn-prev {
+        background-color: #b22222;
+      }
+      .btn-next {
+        right: 0;
+      }
+      .btn-prev {
+        left: 0;
+      }
+      .front, .back {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="book" id="book"></div>
+  <button class="btn-prev" id="prev-btn"><span>&lt;</span></button>
+  <button class="btn-next" id="next-btn"><span>&gt;</span></button>
+
+  <script>
+    const books = [
+      {
+        id: '1',
+        name: 'Book One',
+        author: 'Author One',
+        tag: 'Fiction',
+        price: '$20',
+        describe: 'This is a great book.',
+        rate: '4.5',
+        productimage: 'path/to/image1.jpg',
+        picturemenu: ['path/to/image1_1.jpg', 'path/to/image1_2.jpg']
+      },
+      {
+        id: '2',
+        name: 'Book Two',
+        author: 'Author Two',
+        tag: 'Non-Fiction',
+        price: '$25',
+        describe: 'This is another great book.',
+        rate: '4.7',
+        productimage: 'path/to/image2.jpg',
+        picturemenu: ['path/to/image2_1.jpg', 'path/to/image2_2.jpg']
+      }
+    ];
+
+    const bookContainer = document.getElementById('book');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    let currentBookIndex = 0;
+
+    function createBookPage(book) {
+      const paper = document.createElement('div');
+      paper.className = 'paper';
+      
+      const front = document.createElement('div');
+      front.className = 'front';
+      front.innerHTML = `
+        <div class="product-info">
+          <h1 class="name">${book.name}</h1>
+          <p class="author">Tác giả: ${book.author}</p>
+          <p class="tag">${book.tag}</p>
+          <p class="price">${book.price}</p>
+          <p class="describe">${book.describe}</p>
+          <p>Thời gian giao hàng: 3 ngày</p>
+          <p>Chính sách đổi trả: Đổi trả sản phẩm trong 30 ngày</p>
+          <p class="rate">Đánh giá: ${book.rate}</p>
+          <label for="quantity">Số lượng:</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="1" />
+          <div class="btn">
+            <button class="lpbtn add" onclick="addToCart('${book.id}')">
+              <span>Thêm vào giỏ hàng</span>
+            </button>
+            <button class="lpbtn buy"><span>Mua ngay</span></button>
+          </div>
+        </div>`;
+      
+      const back = document.createElement('div');
+      back.className = 'back';
+      back.innerHTML = `
+        <div class="picturemenu">${book.picturemenu.map((img, index) => `<img src="${img}" alt="View ${index + 1}" />`).join('')}</div>
+        <div class="productimage">
+          <img src="${book.productimage}" alt="Product Image" id="main-product-image" />
+        </div>`;
+      
+      paper.appendChild(front);
+      paper.appendChild(back);
+      bookContainer.appendChild(paper);
+    }
+
+    function displayBook(index) {
+      bookContainer.innerHTML = '';
+      createBookPage(books[index]);
+    }
+
+    function showNextBook() {
+      if (currentBookIndex < books.length - 1) {
+        currentBookIndex++;
+        const paper = document.querySelector('.paper');
+        paper.classList.add('flipped');
+        setTimeout(() => {
+          displayBook(currentBookIndex);
+          paper.classList.remove('flipped');
+        }, 500);
+      }
+    }
+
+    function showPrevBook() {
+      if (currentBookIndex > 0) {
+        currentBookIndex--;
+        const paper = document.querySelector('.paper');
+        paper.classList.add('flipped');
+        setTimeout(() => {
+          displayBook(currentBookIndex);
+          paper.classList.remove('flipped');
+        }, 500);
+      }
+    }
+
+    function addToCart(bookId) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const book = books.find(b => b.id === bookId);
+      cart.push(book);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${book.name} has been added to your cart.`);
+    }
+
+    prevBtn.addEventListener('click', showPrevBook);
+    nextBtn.addEventListener('click', showNextBook);
+
+    displayBook(currentBookIndex);
+  </script>
+</body>
+</html>

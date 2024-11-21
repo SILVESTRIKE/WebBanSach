@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPS BOOKSHOP</title>
+    <link rel="stylesheet" href="../css/onleffect.css" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #fdf5e6;
+      margin: 0;
+      padding: 0;
+      color: #5a4632;
+      font-size: 2vh;
+    }
+
+    .book {
+      position: relative;
+      width: 30vw;
+      height: 80vh;
+      transition: transform 0.5s;
+    }
+    .paper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      perspective: 100vw;
+    }
+    .back,
+    .front {
+      height: 100%;
+      flex: 1 1 20rem;
+      padding: 1rem;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: 1px solid #d4c4a8;
+      background-color: #d4c4a8;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+      position: absolute;
+      transition: transform 0.5s;
+      border: 10px solid brown;
+    }
+
+    .back {
+      z-index: 0;
+      display: flex;
+      align-items: center;
+    }
+    .front {
+      z-index: 1;
+      backface-visibility: hidden;
+      input {
+        font-size: 2vh;
+        border-radius: 50em;
+        padding: 1vh 1vw;
+        width: 2vw;
+      }
+    }
+    .back-content {
+      transform: rotateY(180deg);
+
+      .picturemenu {
+        display: flex;
+        flex-direction: column;
+        margin: 1vw;
+      }
+
+      .picturemenu img {
+        width: 5vh;
+        display: block;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        border: 1px solid #d4c4a8;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .productimage {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .productimage img {
+        height: 70vh;
+      }
+    }
+    .front-content {
+      .price {
+        color: #b22222;
+        font-weight: bolder;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+      }
+    }
+    .flipped .front,
+    .flipped .back {
+      transform: rotateY(-180deg);
+    }
+    .btn {
+      padding: 1vw;
+      margin: 1vw;
+      border: none;
+      border-radius: 2em;
+      cursor: pointer;
+    }
+
+    .prev-btn,
+    .next-btn {
+      background-color: lightgray;
+      top: 50%;
+      position: absolute;
+      border: none;
+      cursor: pointer;
+      z-index: 99;
+      width: 1vw;
+      height: 5vh;
+    }
+
+    .prev-btn {
+      left: -2%;
+    }
+
+    .next-btn {
+      right: -2%;
+    }
+
+    .flipped {
+      transform: rotateY(100deg);
+    }
+
+    @media screen and (max-width: 1600px) {
+      .book {
+        flex-direction: column;
+        width: 100vw;
+      }
+
+      .next-btn,
+      .prev-btn {
+        background-color: #b22222;
+        top: 50;
+      }
+
+      .next-btn {
+        right: 0;
+      }
+
+      .prev-btn {
+        left: 0;
+      }
+      .front {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    }
+  </style>
+  <body>
+    <header></header>
+    <button class="prev-btn"></button>
+
+    <div class="book">
+      <div class="back" id="back">
+        <div class="picturemenu"></div>
+        <div class="productimage">
+          <img src="" alt="Product Image" id="main-product-image" />
+        </div>
+      </div>
+      <div class="front" id="front">
+        <div class="product-info">
+          <h1 class="name">asdasdasds</h1>
+          <p class="author">adasdasd</p>
+          <p class="tag">asdasdsad</p>
+          <p class="price">asdasdasdas</p>
+          <p class="describe">asdsadsdas</p>
+          <p>Thời gian giao hàng: 3 ngày</p>
+          <p>Chính sách đổi trả: Đổi trả sản phẩm trong 30 ngày</p>
+          <p class="rate">sdasdas</p>
+          <label for="quantity">Số lượng:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            value="1"
+          />
+          <div class="btn">
+            <button class="lpbtn add" onclick="addToCart()">
+              <span>Thêm vào giỏ hàng</span>
+            </button>
+            <button class="lpbtn buy"><span>Mua ngay</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="books.js"></script>
+    <script src="loadNavbar.js"></script>
+    <script src="customers.js"></script>
+    <button class="next-btn"></button>
+
+    <script>
+      // References to DOM Elements
+      const prevBtn = document.querySelector("#prev-btn");
+      const nextBtn = document.querySelector("#next-btn");
+      const book = document.querySelector("#book");
+
+      // Event Listener
+      prevBtn.addEventListener("click", goPrevPage);
+      nextBtn.addEventListener("click", goNextPage);
+
+      // Business Logic
+      let currentLocation = 1;
+      let numOfPapers = 0; // Start with no papers
+      let maxLocation = 0;
+
+      // Function to create a new paper
+      function createPaper() {
+        const paperNumber = numOfPapers + 1; // New paper number
+        const paper = document.createElement("div");
+        paper.className = "paper";
+        paper.id = `p${paperNumber}`;
+        paper.style.zIndex = numOfPapers - paperNumber + 1;
+
+        const front = document.createElement("div");
+        front.className = "front";
+        const frontContent = document.createElement("div");
+        frontContent.className = "front-content";
+        frontContent.innerHTML = `<div class="product-info">
+          <h1 class="name">asdasdasds</h1>
+          <p class="author">adasdasd</p>
+          <p class="tag">asdasdsad</p>
+          <p class="price">asdasdasdas</p>
+          <p class="describe">asdsadsdas</p>
+          <p>Thời gian giao hàng: 3 ngày</p>
+          <p>Chính sách đổi trả: Đổi trả sản phẩm trong 30 ngày</p>
+          <p class="rate">sdasdas</p>
+          <label for="quantity">Số lượng:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            value="1"
+          />
+          <div class="btn">
+            <button class="lpbtn add" onclick="addToCart()">
+              <span>Thêm vào giỏ hàng</span>
+            </button>
+            <button class="lpbtn buy"><span>Mua ngay</span></button>
+          </div>
+        </div>`;
+        front.appendChild(frontContent);
+
+        const back = document.createElement("div");
+        back.className = "back";
+        const backContent = document.createElement("div");
+        backContent.className = "back-content";
+        backContent.innerHTML = `<div class="back" id="back">
+          <div class="picturemenu"><img src="../Sách/Sách Việt Nam/Tiểu thuyết/Nguyễn Nhật Ánh/lá nằm trong lá bìa.jpg" alt="View 1"><img src="../Sách/Sách Việt Nam/Tiểu thuyết/Nguyễn Nhật Ánh/lá nằm trong lá bìa sau.jpg" alt="View 2"><img src="../Sách/Sách Việt Nam/Tiểu thuyết/Nguyễn Nhật Ánh/lá nằm trong lá trang 1.jpg" alt="View 3"><img src="../Sách/Sách Việt Nam/Tiểu thuyết/Nguyễn Nhật Ánh/lá nằm trong lá trang 2.jpg" alt="View 4"></div>
+        <div class="productimage">
+          <img src="../Sách/Sách Việt Nam/Tiểu thuyết/Nguyễn Nhật Ánh/lá nằm trong lá bìa.jpg" alt="Product Image" id="main-product-image">
+        </div>
+      </div>`;
+        back.appendChild(backContent);
+        paper.appendChild(front);
+        paper.appendChild(back);
+
+        book.appendChild(paper);
+        numOfPapers++;
+        maxLocation++;
+      }
+
+      // Create initial pages
+      for (let i = 1; i <= 1; i++) {
+        createPaper();
+      }
+
+      function openBook() {
+        book.style.transform = "translateX(50%)";
+        prevBtn.style.transform = "translateX(-180px)";
+        nextBtn.style.transform = "translateX(180px)";
+      }
+
+      function closeBook(isAtBeginning) {
+        if (isAtBeginning) {
+          book.style.transform = "translateX(0)";
+        } else {
+          book.style.transform = "translateX(50%)";
+        }
+        prevBtn.style.transform = "translateX(-17.5vw)";
+        nextBtn.style.transform = "translateX(17.5vw)";
+      }
+
+      function goNextPage() {
+        if (currentLocation < maxLocation) {
+          const paper = document.querySelector(`#p${currentLocation}`);
+          if (currentLocation === 1) {
+            openBook();
+          }
+          paper.classList.add("flipped");
+          paper.style.zIndex = currentLocation;
+          currentLocation++;
+          if (currentLocation === maxLocation) {
+            closeBook(false);
+          }
+        } else {
+          createPaper();
+          goNextPage();
+        }
+      }
+
+      function goPrevPage() {
+        if (currentLocation > 1) {
+          currentLocation--;
+          const paper = document.querySelector(`#p${currentLocation}`);
+          if (currentLocation === 1) {
+            closeBook(true);
+          }
+          paper.classList.remove("flipped");
+          paper.style.zIndex = maxLocation - currentLocation;
+        }
+      }
+    
+      function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+    </script>
+
+  </body>
+</html>

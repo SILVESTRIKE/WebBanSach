@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPS BOOKSHOP</title>
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="../css/details.css" />
+    <link rel="stylesheet" href="../css/onleffect.css" />
+  </head>
+  <body>
+    <header></header>
+    <div class="container">
+      <div class="left-page" id="left-page">
+        <button class="btn-prev"></button>
+        <div class="picturemenu"></div>
+        <div class="productimage">
+          <img src="" alt="Product Image" id="main-product-image" />
+        </div>
+      </div>
+      <div class="right-page" id="right-page">
+        <div class="product-info">
+          <h1 class="name"></h1>
+          <p class="author"></p>
+          <p class="tag"></p>
+          <p class="price"></p>
+          <p class="describe"></p>
+          <p>Thời gian giao hàng: 3 ngày</p>
+          <p>Chính sách đổi trả: Đổi trả sản phẩm trong 30 ngày</p>
+          <p class="rate"></p>
+          <label for="quantity">Số lượng:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            value="1"
+          />
+          <div class="btn">
+            <button class="lpbtn add" onclick="addToCart()">
+              <span>Thêm vào giỏ hàng</span>
+            </button>
+            <a href="DKMH.html"><button class="lpbtn buy">
+              <span>Mua ngay</span>
+            </button></a>
+            <a href="danhgia.html"><button class="lpbtn" style="background-color: yellow;">
+               <span>Đánh giá</span> 
+              </button></a>
+          </div>
+        </div>
+        <button class="btn-next"></button>
+      </div>
+    </div>
+    <script src="books.js"></script>
+    <script src="loadNavbar.js"></script>
+    <script src="loadBooks.js"></script>
+    <script src="customers.js"></script>
+    <script src="cart.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const bookId = getQueryParameter("id");
+        const currentBookIndex = books.findIndex((book) => book.id == bookId);
+
+        if (currentBookIndex !== -1) {
+          displayBook(books[currentBookIndex]);
+        } else {
+          document.querySelector(".container").innerHTML =
+            "<p>Book not found</p>";
+        }
+
+        document
+          .querySelector(".btn-next")
+          .addEventListener("click", showNextBook);
+        document
+          .querySelector(".btn-prev")
+          .addEventListener("click", showPrevBook);
+      });
+
+      function addToCart() {
+        const bookId = getQueryParameter("id");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const book = books.find((b) => b.id == bookId);
+        const quantity = parseInt(document.getElementById("quantity").value);
+
+        book.quantity = quantity;
+
+        cart.push(book);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${book.name} has been added to your cart.`);
+      }
+
+      function displayBook(book) {
+        document.querySelector(".name").textContent = book.name;
+        document.querySelector(
+          ".author"
+        ).textContent = `Tác giả: ${book.author}`;
+        document.querySelector(".tag").textContent = book.tag;
+        document.querySelector(".price").textContent = book.price;
+        document.querySelector(".describe").textContent = book.describe;
+        document.querySelector(".rate").textContent = `Đánh giá: ${book.rate}`;
+        document.getElementById("main-product-image").src = book.productimage;
+
+        const pictureMenu = document.querySelector(".picturemenu");
+        pictureMenu.innerHTML = "";
+        book.picturemenu.forEach((image, index) => {
+          const imgElement = document.createElement("img");
+          imgElement.src = image;
+          imgElement.alt = `View ${index + 1}`;
+          imgElement.addEventListener("click", () => {
+            document.getElementById("main-product-image").src = image;
+          });
+          pictureMenu.appendChild(imgElement);
+        });
+      }
+
+      function showNextBook() {
+        if (currentBookIndex < books.length - 1) {
+          currentBookIndex++;
+          displayBook(books[currentBookIndex]);
+        }
+      }
+
+      function showPrevBook() {
+        if (currentBookIndex > 0) {
+          currentBookIndex--;
+          displayBook(books[currentBookIndex]);
+        }
+      }
+
+      function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+    </script>
+  </body>
+</html>

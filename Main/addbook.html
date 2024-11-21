@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="../css/form.css" />
+    <link rel="stylesheet" href="../css/onleffect.css" />
+    <title>DPS BOOKSHOP</title>
+  </head>
+  <header></header>
+  <body>
+    <div class="container">
+      <div class="main">
+        <h1>THÊM SẢN PHẨM</h1>
+        <form id="add-book-form" enctype="multipart/form-data">
+          <table>
+            <tr>
+              <td>Tên sách:</td>
+              <td><input type="text" name="name" id="name" required /></td>
+            </tr>
+            <tr>
+              <td>Tag:</td>
+              <td>
+                <select name="tag" id="tag" style="width: 85%" required>
+                  <optgroup label="Tag">
+                    <option value="1">Giả tưởng kinh dị</option>
+                    <option value="2">Khoa học viễn tưởng</option>
+                    <option value="3">Tâm lí</option>
+                    <option value="4">Ngôn Tình</option>
+                    <option value="5">Tác Phẩm Kinh Điển</option>
+                    <option value="6">Tiểu Thuyết</option>
+                    <option value="7">Truyện Ngắn-Tân Văn</option>
+                    <option value="8">Sách Giáo Khoa Lớp 10</option>
+                    <option value="9">Sách Giáo Khoa Lớp 11</option>
+                    <option value="10">Sách Giáo Khoa Lớp 12</option>
+                  </optgroup>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Ảnh bìa sách:</td>
+              <td>
+                <input
+                  type="file"
+                  id="productimage"
+                  accept="image/*"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Tất cả ảnh sách:<span style="font-weight: lighter"></span>
+              </td>
+              <td>
+                <input type="file" id="picturemenu" accept="image/*" required />
+              </td>
+            </tr>
+            <tr>
+              <td>(bao gồm 4 ảnh, ảnh đầu là bìa)</td>
+              <td>
+                <input type="file" id="picturemenu" accept="image/*" required />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input type="file" id="picturemenu" accept="image/*" required />
+              </td>
+            </tr>
+            <tr>
+              <td>Tên tác giả:</td>
+              <td>
+                <input type="text" name="author" id="author" required />
+              </td>
+            </tr>
+            <tr>
+              <td>Giá:</td>
+              <td>
+                <input type="number" name="price" id="price" required />
+                <span>VND</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Mô tả:</td>
+              <td>
+                <textarea
+                  name="describe"
+                  id="describe"
+                  style="min-width: 85%; font-size: 1.5vh"
+                ></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button class="csbtn" type="submit">XÁC NHẬN</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+    <script src="loadNavbar.js"></script>
+    <script src="customers.js"></script>
+    <script src="books.js"></script>
+    <script>
+      document
+        .getElementById("add-book-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const tag = document.getElementById("tag").value;
+          const author = document.getElementById("author").value;
+          const price = document.getElementById("price").value + " VND";
+          const describe = document.getElementById("describe").value;
+
+          const productImage = document.getElementById("productimage").files[0];
+          const pictureMenuFiles = [
+            document.getElementById("picturemenu1").files[0],
+            document.getElementById("picturemenu2").files[0],
+            document.getElementById("picturemenu3").files[0],
+            document.getElementById("picturemenu4").files[0],
+          ];
+
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            const productImageUrl = reader.result;
+
+            const pictureMenuUrls = [];
+            let filesProcessed = 0;
+
+            pictureMenuFiles.forEach((file, index) => {
+              const menuReader = new FileReader();
+              menuReader.onloadend = function () {
+                pictureMenuUrls[index] = menuReader.result;
+                filesProcessed++;
+
+                if (filesProcessed === pictureMenuFiles.length) {
+                  const newBook = {
+                    id: getNextBookId(),
+                    name: name,
+                    productimage: productImageUrl,
+                    picturemenu: pictureMenuUrls,
+                    author: author,
+                    tag: tag,
+                    price: price,
+                    rate: "N/A", 
+                    describe: describe,
+                  };
+
+                  addBook(newBook);
+                  alert("Book added successfully!");
+                  window.location.href = "main.html"; // Redirect to main page after adding book
+                }
+              };
+              menuReader.readAsDataURL(file);
+            });
+          };
+          reader.readAsDataURL(productImage);
+        });
+    </script>
+  </body>
+</html>

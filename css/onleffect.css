@@ -1,0 +1,125 @@
+
+.lpbtn {
+    align-self: center;
+    padding: 12px 24px;
+    background-color: white;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    width: 60%;
+    font-weight: bolder;
+    font-family: monospace;
+    font-size: 2vh;
+
+}
+
+.lpbtn span {
+    color: black;
+    position: relative;
+    z-index: 1;
+    transition: color 0.6s cubic-bezier(0.53, 0.21, 0, 1);
+}
+
+.lpbtn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-radius: 6px;
+    transform: translate(-100%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: #74512d;
+    transition: transform 0.6s cubic-bezier(0.53, 0.21, 0, 1);
+}
+
+.lpbtn:hover span {
+    color: white;
+    
+}
+.lpbtn:hover span a{
+    color:#fff
+}
+.lpbtn span a{
+    text-decoration: none;
+    color: #111;
+}
+.lpbtn:hover::before {
+    transform: translate(0, -50%);
+}
+
+.add {
+    background-color: #b22222;
+}
+.add::before{
+    background-color: red;
+}
+
+.buy {
+    background-color: #006400;
+}
+.buy::before{
+    background-color: forestgreen;
+}
+.scrollbar {
+    height: 100vh;
+    overflow: auto;
+}
+
+.csbtn {
+    background-color: 
+  #f8f4e1;
+    border: 2px solid 
+  #422800;
+    border-radius: 30px;
+    box-shadow: 
+  #422800 4px 4px 0 0;
+    color: 
+  #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.5vh;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .csbtn:hover {
+    background-color: 
+  #fff;
+  }
+  
+  .csbtn:active {
+    box-shadow: 
+  #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+  
+  @media (min-width: 768px) {
+    .csbtn {
+      min-width: 120px;
+      padding: 0 25px;
+    }
+  }
+
+/*        ScrollBar 2    */
+
+#scrollbar2::-webkit-scrollbar {
+    width: 2vw;
+}
+
+#scrollbar2::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#scrollbar2::-webkit-scrollbar-thumb {
+    background-image: url('https://i.ibb.co/1RHr40z/248599.png'); 
+    background-repeat: no-repeat, no-repeat;
+    background-size: 2vw;
+    transform: translateY(10vh);
+}

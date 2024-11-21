@@ -1,0 +1,84 @@
+.sp {
+    font-family: arial;
+    margin: 0 auto;
+    height: 100%;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-image: url(../Main/img/background.jpg);
+}
+
+td:not(:first-child):not(:last-child) {
+    border-top: 2vh solid rgb(65, 42, 15);
+    border-top: 2vh solid rgb(65, 42, 15);
+}
+
+tr {
+    box-shadow: inset 0 0 1vh 2vh rgb(57, 41, 3);
+
+}
+
+td:first-child {
+    border: 2vh solid rgb(65, 42, 15);
+    border-right: none;
+}
+
+td:last-child {
+    border: 2vh solid rgb(65, 42, 15);
+    border-left: none;
+}
+
+tr,
+td {
+
+    padding: 1vw 1vh;
+    vertical-align: top;
+}
+
+.hinh {
+    height: 50%;
+    text-align: center;
+}
+
+.hinh img {
+    height: 180px;
+}
+
+.nhan {
+    background-color: white;
+    text-align: center;
+
+    .Ten {
+        font-weight: bolder;
+        margin-top: 5%;
+        font-size: larger;
+    }
+
+    .Gia {
+        font-weight: bold;
+        color: red;
+    }
+
+    .DG {
+        font-size: smaller;
+        color: grey;
+    }
+}
+
+/* .KM {
+    height: fit-content;
+    margin-top: 5%;
+} */
+
+.giamgia {
+    padding: 0 2%;
+    width: fit-content;
+    height: fit-content;
+    color: red;
+    line-height: 100%;
+    border-radius: 25px;
+    background-color: yellow;
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        background-color: powderblue;
+      }
+
+      /* Book */
+      .book {
+        position: relative;
+        width: 350px;
+        height: 500px;
+        transition: transform 0.5s;
+      }
+
+      .paper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        perspective: 1500px;
+      }
+
+      .front,
+      .back {
+        background-color: white;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform-origin: left;
+        transition: transform 0.5s;
+      }
+
+      .front {
+        z-index: 1;
+        backface-visibility: hidden;
+        border-left: 3px solid powderblue;
+      }
+
+      .back {
+        z-index: 0;
+      }
+
+      .front-content,
+      .back-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .back-content {
+        transform: rotateY(180deg);
+      }
+
+      /* Paper flip effect */
+      .flipped .front,
+      .flipped .back {
+        transform: rotateY(-180deg);
+      }
+
+      /* Controller Buttons */
+      button {
+        border: none;
+        cursor: pointer;
+        margin: 1vw;
+        transition: transform 0.5s;
+        background-color: red;
+        width: 2vw;
+        height: 2vw;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      button:hover i {
+        color: #636363;
+      }
+
+      i {
+        font-size: 50px;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="prev-btn"><</button>
+
+    <div id="book" class="book"></div>
+
+    <button id="next-btn">></button>
+
+    <script>
+      // References to DOM Elements
+      const prevBtn = document.querySelector("#prev-btn");
+      const nextBtn = document.querySelector("#next-btn");
+      const book = document.querySelector("#book");
+
+      // Event Listener
+      prevBtn.addEventListener("click", goPrevPage);
+      nextBtn.addEventListener("click", goNextPage);
+
+      // Business Logic
+      let currentLocation = 1;
+      let numOfPapers = 0; // Start with no papers
+      let maxLocation = 1;
+
+      // Function to create a new paper
+      function createPaper() {
+        const paperNumber = numOfPapers + 1; // New paper number
+        const paper = document.createElement("div");
+        paper.className = "paper";
+        paper.id = `p${paperNumber}`;
+        paper.style.zIndex = numOfPapers - paperNumber + 1;
+
+        const front = document.createElement("div");
+        front.className = "front";
+        const frontContent = document.createElement("div");
+        frontContent.className = "front-content";
+        frontContent.innerHTML = `<h1>Front ${paperNumber}</h1>`;
+        front.appendChild(frontContent);
+
+        const back = document.createElement("div");
+        back.className = "back";
+        const backContent = document.createElement("div");
+        backContent.className = "back-content";
+        backContent.innerHTML = `<h1>Back ${paperNumber}</h1>`;
+        back.appendChild(backContent);
+
+        paper.appendChild(front);
+        paper.appendChild(back);
+
+        book.appendChild(paper);
+        numOfPapers++;
+        maxLocation++;
+      }
+
+      // Create initial pages
+      for (let i = 1; i <= 3; i++) {
+        createPaper();
+      }
+
+      function openBook() {
+        book.style.transform = "translateX(50%)";
+        prevBtn.style.transform = "translateX(-180px)";
+        nextBtn.style.transform = "translateX(180px)";
+      }
+
+      function closeBook(isAtBeginning) {
+        if (isAtBeginning) {
+          book.style.transform = "translateX(0%)";
+        } else {
+          book.style.transform = "translateX(100%)";
+        }
+        prevBtn.style.transform = "translateX(0px)";
+        nextBtn.style.transform = "translateX(0px)";
+      }
+
+      function goNextPage() {
+        if (currentLocation < maxLocation) {
+          const paper = document.querySelector(`#p${currentLocation}`);
+          if (currentLocation === 1) {
+            openBook();
+          }
+          paper.classList.add("flipped");
+          paper.style.zIndex = currentLocation;
+          currentLocation++;
+          if (currentLocation === maxLocation) {
+            closeBook(false);
+          }
+        } else {
+          createPaper();
+          goNextPage();
+        }
+      }
+
+      function goPrevPage() {
+        if (currentLocation > 1) {
+          currentLocation--;
+          const paper = document.querySelector(`#p${currentLocation}`);
+          if (currentLocation === 1) {
+            closeBook(true);
+          }
+          paper.classList.remove("flipped");
+          paper.style.zIndex = maxLocation - currentLocation;
+        }
+      }
+    </script>
+  </body>
+</html>

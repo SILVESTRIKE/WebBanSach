@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPS BOOKSHOP</title>
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="../css/DKMH.css">
+    <link rel="stylesheet" href="../css/onleffect.css">
+  </head>
+  <body>
+    <header></header>
+    <div class="container">
+        <form style="background-color: white;border-radius: 1vw;">
+          <table cellspacing="20" class="form-table">
+            <thead>
+              <tr>
+                <th colspan="2" class="form-header">
+                  <h3>Chọn địa chỉ nhận hàng</h3>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="option">
+                    <input type="radio" name="NH" id="taiNha" checked class="radio-input" required/>
+                    <label for="taiNha">
+                      <img src="../img/truckicon.png" class="icon" />
+                      nhận hàng tại nhà
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div class="option">
+                    <input type="radio" name="NH" id="taiTT" class="radio-input" required/>
+                    <label for="taiTT">
+                      <img src="../img/house.png" class="icon" />
+                      nhận hàng tại DPS BOOKSHOP
+                    </label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Họ và tên <span class="required">*</span></label>
+                    <input type="text" class="input-field" required />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Số điện thoại <span class="required">*</span></label>
+                    <input type="text" class="input-field" required/>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Email</label>
+                    <input type="text" class="input-field" required/>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Tỉnh / Thành phố <span class="required">*</span></label>
+                    <select class="input-field" required>
+                      <option value="0">Chọn tỉnh / thành phố</option>
+                      <option value="1">TP.HCM nội thành</option>
+                      <option value="2">Hà Nội</option>
+                      <option value="3">Huế</option>
+                      <option value="4">Đà Nẵng</option>
+                      <option value="5">Quảng Ninh</option>
+                      <option value="6">Cần Thơ</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Quận/ Huyện <span class="required">*</span></label>
+                    <select class="input-field" required>
+                      <option value="">Chọn quận / huyện</option>
+                      <option value="1">Quận 1</option>
+                      <option value="2">Quận 2</option>
+                      <option value="3">Quận 3</option>
+                      <option value="4">Quận Tân Phú</option>
+                      <option value="5">Quận Tân Bình</option>
+                      <option value="6">Quận Thủ Đức</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-container">
+                    <label class="input-label">Phường / Xã <span class="required">*</span></label>
+                    <select class="input-field" required>
+                      <option value="0">Chọn phường / xã</option>
+                      <option value="1">Phường 1</option>
+                      <option value="2">Phường 2</option>
+                      <option value="3">Phường 3</option>
+                      <option value="4">Phường 10</option>
+                      <option value="5">Phường 12</option>
+                      <option value="6">Phường 14</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div class="input-container">
+                    <label class="input-label">Số nhà / Tên đường <span class="required">*</span></label>
+                    <input type="text" class="input-field" required/>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div class="checkbox-container">
+                    <input type="checkbox" name="register" class="checkbox" required/>
+                    <label>Sử dụng thông tin này để đăng ký tài khoản mua hàng!</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div class="input-container">
+                    <label class="input-label">Để lại lời nhắn cho DPSBOOKSTORE</label>
+                    <textarea id="hobby" name="hobby" rows="2" class="textarea-field"></textarea>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th colspan="2" class="form-header">
+                  <h3>Chọn hình thức thanh toán</h3>
+                </th>
+              </tr>
+              <tr>
+                <td class="form-cell">
+                  <div class="payment-option">
+                    <input type="radio" name="payment" id="cash" checked class="radio-input" required/>
+                    <label for="cash">
+                      <img src="../img/cash.png" class="icon" />
+                      Thanh toán khi nhận hàng
+                    </label>
+                  </div>
+                </td>
+                <td class="form-cell">
+                  <div class="payment-option">
+                    <input type="radio" name="payment" id="atm" class="radio-input" required/>
+                    <label for="atm">
+                      <img src="../img/bank.png" class="icon" />
+                      Thanh toán qua thẻ
+                    </label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="checkbox-container">
+                  <input type="checkbox" name="installation" class="checkbox" />
+                  <label for="installation">Bạn muốn sử dụng dịch vụ lắp đặt</label>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="checkbox-container">
+                  <input type="checkbox" name="agreement" checked class="checkbox" />
+                  <label for="agreement">Tôi đồng ý <a href="" class="agreement-link">thỏa thuận bảo mật và chính sách mua hàng</a></label>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="checkbox-container">
+                  <input type="checkbox" name="invoice" class="checkbox" />
+                  <label for="invoice">Yêu cầu xuất hóa đơn GTGT cho đơn hàng này</label>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="submit" value="THANH TOÁN" class="csbtn" style="width: 100%;" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    <script src="loadNavbar.js"></script>
+    <script src="customers.js"></script>
+  </body>
+</html>

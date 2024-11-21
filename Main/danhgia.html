@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPS BOOKSHOP</title>
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/form.css" />
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/onleffect.css">
+    <style>
+      .checked {
+        color: orange;
+      }
+
+      textarea {
+        width: 80vw;
+        height: 25vh;
+        font-size: x-large;
+        padding: 2vw;
+        border-radius: 2vw;
+      }
+
+      .star{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <header></header>
+  <body>
+    <div class="container">
+      <div class="main">
+        <h1>ĐÁNH GIÁ</h1>
+        <form action="">
+          <div class="input">
+            <textarea id="rateinput" name="input" rows="1" placeholder="Hãy nêu cảm nghĩ của bạn về sản phẩm"></textarea>
+          </div>
+          <div class="star">
+            <span class="fa fa-star" data-index="1"></span>
+            <span class="fa fa-star" data-index="2"></span>
+            <span class="fa fa-star" data-index="3"></span>
+            <span class="fa fa-star" data-index="4"></span>
+            <span class="fa fa-star" data-index="5"></span>
+          </div>
+          <a href="main.html"><button class="csbtn">XÁC NHẬN</button></a>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="loadNavbar.js"></script>
+  <script>
+    const stars = document.querySelectorAll(".fa-star");
+
+    stars.forEach((star, index) => {
+      star.addEventListener("click", () => {
+        const rating = index + 1;
+
+        updateStars(rating);
+      });
+    });
+
+    function updateStars(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add("checked");
+        } else {
+          star.classList.remove("checked");
+        }
+      });
+    }
+  </script>
+</html>

@@ -1,0 +1,154 @@
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #fdf5e6;
+    margin: 0;
+    padding: 0;
+    color: #5a4632;
+    font-size: 2vh;
+}
+
+.container {
+    width: 70vw;
+    margin: auto;
+    padding: 1.25rem;
+    background-color: #5a4632;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    overflow: hidden;
+    margin-top: 15vh;
+    perspective: 1500px;
+    /* Added for flip effect */
+}
+
+.left-page,
+.right-page {
+    height: 80vh;
+    flex: 1 1 20rem;
+    padding: 1rem;
+    border: 1px solid #d4c4a8;
+    background-color: #d4c4a8;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.left-page {
+    display: flex;
+    align-items: center;
+}
+.right-page{
+    input{
+        font-size: 2vh;
+        border-radius: 50em;
+        padding: 1vh 1vw;
+        width: 2vw;
+    }
+}
+.picturemenu {
+    display: flex;
+    flex-direction: column;
+    margin: 1vw;
+}
+
+.picturemenu img {
+    width: 5vh;
+    display: block;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border: 1px solid #d4c4a8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.productimage {
+    justify-content: center;
+    align-items: center;
+}
+
+.productimage img {
+    height: 70vh;
+}
+
+.price {
+    color: #b22222;
+    font-weight: bolder;
+}
+
+.original-price {
+    text-decoration: line-through;
+}
+
+.btn {
+    padding: 1vw;
+    margin: 1vw;
+    border: none;
+    border-radius: 2em;
+    cursor: pointer;
+    font-family: "Courier New", Courier, monospace;
+}
+
+
+
+.btn-prev,
+.btn-next {
+    background-color: lightgray;
+    top: 50%;
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+    width: 1vw;
+    height: 5vh;
+}
+
+.btn-prev {
+    left: -2%;
+}
+
+.btn-next {
+    right: -2%;
+}
+
+@keyframes pageTurn {
+    0% {
+        transform: rotateY(10);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.flipped {
+    transform: rotateY(100deg);
+}
+
+@media screen and (max-width: 1600px) {
+    
+    .container {
+        flex-direction: column;
+        width: 100vw;
+    }
+
+
+    .btn-next,
+    .btn-prev {
+        background-color: #b22222;
+        top: 50;
+    }
+
+    .btn-next {
+        right: 0;
+    }
+
+    .btn-prev {
+        left: 0;
+    }
+    .right-page{
+        overflow-y: scroll;
+    overflow-x: hidden;
+    }
+}

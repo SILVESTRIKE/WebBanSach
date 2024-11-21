@@ -1,0 +1,265 @@
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .container {
+
+        background-color: #fff;
+        padding-top: 10vh;
+        background-image: url("../img/background.jpg");
+
+    }
+
+    .content {
+        height: 92vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .block {
+        display: flex;
+        background-color: #f8f4e1;
+        margin: 0.5vw;
+        padding: 1vw;
+        border-radius: 1vw;
+        box-shadow: 0 1vh 1vw rgba(0, 0, 0, 0.1);
+    }
+
+    .left {
+        width: 75vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .row1 {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .row2 {
+        position: relative;
+        height: 15vh;
+    }
+
+    .profile-main {
+        display: flex;
+        width: 30vw;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .profile-main .username {
+        font-size: 2vh;
+        font-weight: bolder;
+        background-color: #74512d;
+        color: #f8f4e1;
+        padding: 1vw;
+        border-radius: 50em;
+        margin: 1vw 2vw;
+    }
+
+
+
+    .avatar {
+        width: 12vw;
+        height: 12vw;
+        border-radius: 50%;
+        border: 0.5vw dotted #74512d;
+        animation: spin 20s linear infinite;
+        padding: 1vw;
+        margin: 1vw;
+
+        img {
+            width: 100%;
+            border-radius: 50%;
+            animation: spin 20s linear infinite reverse;
+        }
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .profile-info,
+    .profile-main {
+        height: 55vh;
+    }
+
+    .profile-info,
+    .notifications {
+        width: 35vw;
+    }
+
+    .title2 {
+        font-size: 2.5vh;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #f0f0f0;
+        padding: 0.5vw 1vw;
+        border-radius: 50em;
+        margin: 0;
+        box-shadow: 0 0 10px 1px black inset;
+    }
+
+
+    .label {
+        font-weight: bold;
+    }
+
+    span {
+        font-weight: lighter;
+    }
+
+    .profile-info {
+        padding: 1.5vw;
+    }
+
+    .profile-info,
+    .notifications {
+        flex-direction: column;
+    }
+
+    .profile-info,
+    .profile-main {
+        padding: 1vw;
+    }
+
+    .info {
+        background-color: #af8f6f;
+        padding: 1vw;
+        margin: 1vw 0;
+        border-radius: 1vw;
+        font-size: larger;
+        line-height: 4vh;
+    }
+
+    .orders {
+        height: 20vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 1vw;
+        overflow-y: scroll;
+        padding-top: 8vh;
+    }
+
+    .cover-title {
+        width: calc(100% - 2vw);
+        height: 7vh;
+        background-color: #af8f6f;
+        border-radius: 1vw;
+        z-index: 2;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0.5vw;
+        padding: 0;
+    }
+
+    .orders .order-item {
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+        flex: 0 1 25%;
+        max-width: 25%;
+        padding: 1vw;
+        background-color: #fff;
+        border-radius: 1vw;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .orders .order-item .order-image {
+        width: 5vw;
+        height: 5vh;
+        background-color: #ccc;
+        margin-right: 0.5vw;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        background-color: #fff;
+        border-bottom: 1px solid grey;
+        font-size: larger;
+        border-radius: 50vw;
+        list-style: inside;
+        padding: 1vw;
+        margin: 1vw;
+        transition: all 0.3s;
+    }
+
+    li:hover {
+        transform: translateY(-1vh);
+        background-color: #74512d;
+        color: #f8f4e1;
+    }
+
+    .order-item:hover {
+        transform: scale(1.1);
+        background-color: #74512d;
+        color: #f8f4e1;
+    }
+
+    p,
+    li {
+        font-size: 2vh;
+    }
+
+
+    @media screen and (max-width: 1000px) {
+        html {
+            max-height: 100vh;
+        }
+
+        .left {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notifications {
+            display: none;
+        }
+
+        .row1 {
+            flex-direction: row;
+
+            .notifications {
+                display: none;
+            }
+
+            .profile-info,
+            .profile-main {
+                width: 100%;
+                height: 60vh;
+                padding: 1vw;
+            }
+        }
+
+        .orders {
+            width: 100vw;
+
+            .cover-title {
+                width: 100vw;
+            }
+        }
+    }

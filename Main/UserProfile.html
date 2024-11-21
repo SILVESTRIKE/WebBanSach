@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPS BOOKSHOP</title>
+    <link rel="stylesheet" href="../css/onleffect.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+    <link rel="stylesheet" href="../css/UserProfile.css" />
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon" />
+  </head>
+  <body>
+    <script src="customers.js"></script>
+    <div class="container">
+      <div class="header">
+        <img onclick="window.history.back()" src="../img/back.png" alt="" />
+        <h1>PROFILE</h1>
+        <p></p>
+      </div>
+      <div class="content">
+        <div class="left">
+          <div class="row1">
+            <div class="block profile-info">
+              <h2 class="title2">Profile Info</h2>
+              <div class="info">
+                <p class="label">
+                  TÊN: <span class="username" id="username"></span>
+                </p>
+                <p class="label">
+                  GIỚI TÍNH: <span class="sex" id="sex"></span>
+                </p>
+                <p class="label">
+                  EMAIL: <span class="email" id="email"></span>
+                </p>
+                <p class="label">SDT: <span class="phone" id="phone"></span></p>
+                <p class="label">
+                  NGÀY SINH: <span class="doB" id="doB"></span>
+                </p>
+                <p class="label">
+                  ĐỊA CHỈ: <span class="address" id="address"></span>
+                </p>
+              </div>
+              <button class="lpbtn">
+                <span> <a href="editprofile.html"> SỬA</a></span>
+              </button>
+              <button
+                class="lpbtn"
+                id="add-product-btn"
+                style="display: none; margin-top: 1vh"
+              >
+                <span><a href="addbook.html">THÊM SẢN PHẨM</a></span>
+              </button>
+            </div>
+            <div class="block profile-main">
+              <div class="avatar">
+                <img src="" alt="Avatar" id="avatar" />
+                <input
+                  type="file"
+                  id="avatar-input"
+                  style="display: none"
+                  accept="image/*"
+                />
+              </div>
+              <div class="user-info">
+                <p class="username" id="main-username"></p>
+                <p class="label">ID: <span class="id" id="id"></span></p>
+                <p class="description" id="description">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Dicta!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="block orders">
+              <div class="cover-title">
+                <h2 class="title2">ĐƠN ĐANG GIAO</h2>
+              </div>
+              <div class="order-item">
+                <div class="order-image"></div>
+                <div class="order-details">
+                  <p class="label">TENSACH</p>
+                  <p>120,000 VND</p>
+                </div>
+              </div>
+              <div class="order-item">
+                <div class="order-image"></div>
+                <div class="order-details">
+                  <p class="label">TENSACH</p>
+                  <p>120,000 VND</p>
+                </div>
+              </div>
+              <div class="order-item">
+                <div class="order-image"></div>
+                <div class="order-details">
+                  <p class="label">TENSACH</p>
+                  <p>120,000 VND</p>
+                </div>
+              </div>
+              <div class="order-item">
+                <div class="order-image"></div>
+                <div class="order-details">
+                  <p class="label">TENSACH</p>
+                  <p>120,000 VND</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block notifications">
+          <h2 class="title2">Notifications</h2>
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+            <li>Dicta, quia id dolor impedit porro corporis esse eos iste</li>
+            <li>nisi, ullam excepturi totam culpa ratione, nihil ipsum</li>
+            <li>similique eveniet quis distinctio!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loggedInUserId = localStorage.getItem("loggedInUserId");
+        const user = customers.find(
+          (customer) => customer.id === loggedInUserId
+        );
+
+        if (user) {
+          document.getElementById(
+            "username"
+          ).textContent = `${user.firstname} ${user.lastname}`;
+          document.getElementById("sex").textContent = user.sex;
+          document.getElementById("email").textContent = user.email;
+          document.getElementById("phone").textContent = user.phone;
+          document.getElementById("doB").textContent = user.doB;
+          document.getElementById("address").textContent = user.address;
+          document.getElementById("avatar").src = user.ava;
+          document.getElementById(
+            "main-username"
+          ).textContent = `${user.firstname} ${user.lastname}`;
+          document.getElementById("id").textContent = user.id;
+
+          if (user.role === "Bán") {
+            document.getElementById("add-product-btn").style.display = "block";
+          }
+        } else {
+          alert("No user is logged in.");
+          window.location.href = "SignIn.html";
+        }
+
+        // Add event listener for avatar image click
+        document
+          .getElementById("avatar")
+          .addEventListener("click", function () {
+            document.getElementById("avatar-input").click();
+          });
+
+        // Add event listener for file input change
+        document
+          .getElementById("avatar-input")
+          .addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                document.getElementById("avatar").src = e.target.result;
+                // Here you should also handle uploading the image to the server
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

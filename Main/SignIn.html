@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/form.css" />
+    <link rel="stylesheet" href="../css/onleffect.css">
+    <link rel="icon" href="../img/logokhongten.png" type="image/x-icon">
+
+    <title>DPS BOOKSHOP</title>
+  </head>
+  <header></header>
+  <body>
+    <script src="../Main/customers.js"></script>
+    <div class="container">
+      <div class="main">
+        <h1>ĐĂNG NHẬP</h1>
+        <h4>
+          Chưa có tài khoản? <span><a href="SignUp.html">Đăng ký</a></span> ở
+          đây.
+        </h4>
+        <form id="sign-in-form">
+          <table>
+            <tr>
+              <td>Email:</td>
+              <td>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="example@email.com"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Mật khẩu:</td>
+              <td><input type="password" id="password" required /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button class="csbtn" type="submit">XÁC NHẬN</button></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+    <script src="loadNavbar.js"></script>
+    <script>
+      document
+        .getElementById("sign-in-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          const user = customers.find(
+            (customer) =>
+              customer.email === email && customer.password === password
+          );
+
+          if (user) {
+            localStorage.setItem("loggedInUserId", user.id);
+            window.location.href = "main.html";
+          } else {
+            alert(
+              "Invalid email or password. Please sign up if you do not have an account."
+            );
+          }
+        });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedCustomers = JSON.parse(localStorage.getItem("customers"));
+        if (storedCustomers) {
+          customers.length = 0;
+          customers.push(...storedCustomers);
+        }
+      });
+    </script>
+  </body>
+</html>
