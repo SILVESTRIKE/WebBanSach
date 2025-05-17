@@ -1,7 +1,7 @@
 const customers = [
     {
         id: 'ADMIN1',
-        ava: '../User/Duong.png',
+        ava: 'User/Duong.png',
         firstname: 'Dương',
         lastname: 'Văn',
         doB: '2004-06-25',
@@ -14,7 +14,7 @@ const customers = [
     },
     {
         id: 'USER1',
-        ava: '../User/AnotherUser.png',
+        ava: 'User/AnotherUser.png',
         firstname: 'Jane',
         lastname: 'Smith',
         doB: '1985-05-15',

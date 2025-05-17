@@ -8,7 +8,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    background-image: url(../Main/img/background.jpg);
+    background-image: url("Main/img/background.jpg");
 }
 
 td:not(:first-child):not(:last-child) {

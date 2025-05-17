@@ -6,7 +6,7 @@ body {
     width: 100%;
     font-family:monospace;
     font-size: 2.5vh;
-    background-image: url(../img/background.jpg);
+    background-image: url(img/background.jpg);
     backdrop-filter: blur(2.5px);
     background-size: cover;
 }
